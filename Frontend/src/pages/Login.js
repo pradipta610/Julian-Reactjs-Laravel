@@ -1,10 +1,9 @@
 //import hook react
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom'
-//import hook useHitory from react router dom
+import { Link } from 'react-router-dom'
 // dulu use history skrng usenavigate namanya
 import { useNavigate } from 'react-router';
-
+import BeatLoader from 'react-spinners/BeatLoader';
 //import axios
 import axios from 'axios';
 
@@ -13,9 +12,11 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    // loading animation
+    const [loading, setLoading] = useState(false);
     //define state validation
     const [validation, setValidation] = useState([]);
-
+    // useEffect(() => console.log(validation), [validation]);
     //define history
     const navigate = useNavigate();
     //hook useEffect
@@ -31,6 +32,7 @@ function Login() {
 
     //function "loginHanlder"
     const loginHandler = async (e) => {
+        setLoading(true);
         e.preventDefault();
 
         //initialize formData
@@ -50,10 +52,12 @@ function Login() {
                 navigate('/dashboard');
             })
             .catch((error) => {
-
                 //assign error to state "validation"
+                // console.log(error)
                 setValidation(error.response.data);
             })
+        setLoading(false);
+
     };
     return (
         <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
@@ -61,6 +65,13 @@ function Login() {
                 <h1 className="text-3xl font-semibold text-center text-purple-700 uppercase">
                     Sign in
                 </h1>
+                {
+                    validation.message && (
+                        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                            {validation.message}
+                        </div>
+                    )
+                }
                 <form className="mt-6" onSubmit={loginHandler}>
                     <div className="mb-2">
                         <label
@@ -80,6 +91,8 @@ function Login() {
                                 </div>
                             )
                         }
+
+
                     </div>
                     <div className="mb-2">
                         <label
@@ -99,16 +112,12 @@ function Login() {
                                 </div>
                             )
                         }
+
                     </div>
-                    <a
-                        href="index.hyml"
-                        className="text-xs text-purple-600 hover:underline"
-                    >
-                        Forget Password?
-                    </a>
                     <div className="mt-6">
-                        <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
-                            Login
+                        <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600" onClick={loginHandler}>
+                            {loading ? <BeatLoader color="#AC38D6" /> :
+                                'login'}
                         </button>
                     </div>
                 </form>
@@ -117,7 +126,7 @@ function Login() {
                     {" "}
                     Don't have an account?{" "}
                     <Link to={'/register'} className='font-medium text-purple-600 hover:underline'>
-                    Sign Up
+                        Sign Up
                     </Link>
                 </p>
             </div>

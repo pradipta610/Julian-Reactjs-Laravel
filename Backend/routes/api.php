@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\GalleryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,7 @@ Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('gallery', GalleryController::class);
+    Route::apiResource('category', CategoryController::class);
 });
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();

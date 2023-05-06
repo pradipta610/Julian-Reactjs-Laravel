@@ -33,7 +33,7 @@ export function Navbar() {
         <div className="flex justify-center items-center h-20 max-w-7xl">
           <Link
             to={"/"}
-            className={navbar ? 'text-black md:justify-self-start md:mr-5 cursor-pointer text-decoration-none md:text-2xl flex items-center absolute top-0 left-0 translate-x-[25%] translate-y-[120%] md:translate-y-[70%]': 'text-white md:justify-self-start md:mr-5 cursor-pointer text-decoration-none md:text-2xl flex items-center absolute top-0 left-0 translate-x-[25%] translate-y-[120%] md:translate-y-[70%]'}
+            className={navbar ? 'text-black md:justify-self-start md:mr-5 cursor-pointer text-decoration-none md:text-2xl flex items-center absolute top-0 left-0 translate-x-[25%] translate-y-[120%] md:translate-y-[70%]': 'text-white md:justify-self-start md:mr-5 cursor-pointer text-decoration-none md:text-2xl flex items-center absolute top-0 left-0 translate-x-[25%] translate-y-[120%] md:translate-y-[70%]'} 
           >
             <i className="fab fa-typo3"></i>Julian Photography
           </Link>
